@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+#for 1 feature
 #scratch
 sample_data_separate_keys = {
     'Height': [
@@ -60,7 +60,7 @@ else:
  plt.scatter(height,weight,color="red",s=100,label="weight predicted by model")
  plt.legend()
  plt.title("linear regression model from scratch")
- plt.show()
+ #plt.show()
  print("weight predicted by scratch model ",weight,"kg ")
 
  #now linear regression model 
@@ -72,3 +72,62 @@ else:
  lp=model.predict([[height]])[0]
  print("weight predicted by linear regression  model =",lp,"kg")
  print("diff bw both predictions is  ",((lp-weight)/lp)*100,"%")
+
+
+ #for 4 features 
+ health_data_by_feature = {
+    'age': [
+        25, 42, 35, 50, 28, 33, 45, 38, 29, 55, 31, 40, 48, 26, 36, 43, 39, 30, 52, 34,
+        41, 46, 27, 37, 44, 32, 49, 29, 35, 42, 47, 28, 36, 43, 39, 31, 51, 33, 40, 48,
+        26, 37, 44, 30, 50, 25, 42, 35, 50, 28, 33, 45, 38, 29, 55, 31, 40, 48, 26, 36,
+        43, 39, 30, 52, 34, 41, 46, 27, 37, 44, 32, 49, 29, 35, 42, 47, 28, 36, 43, 39,
+        31, 51, 33, 40, 48, 26, 37, 44, 30, 50, 25, 42, 35, 50, 28, 33, 45, 38, 29, 55
+    ],
+    'weight': [
+        68, 75, 80, 90, 60, 70, 85, 77, 65, 95, 72, 78, 88, 63, 74, 82, 79, 67, 92, 71,
+        76, 86, 64, 73, 83, 69, 89, 66, 72, 80, 87, 65, 74, 82, 78, 70, 91, 71, 77, 88,
+        62, 73, 83, 68, 93, 68, 75, 80, 90, 60, 70, 85, 77, 65, 95, 72, 78, 88, 63, 74,
+        82, 79, 67, 92, 71, 76, 86, 64, 73, 83, 69, 89, 66, 72, 80, 87, 65, 74, 82, 78,
+        70, 91, 71, 77, 88, 62, 73, 83, 68, 93, 68, 75, 80, 90, 60, 70, 85, 77, 65, 95
+    ],
+    'sodium_intake': [
+        2300, 2800, 2000, 3500, 1800, 2200, 3000, 2500, 1900, 3600, 2100, 2600, 3300, 2000, 2400, 2900, 2700, 2100, 3500, 2300,
+        2800, 3100, 1900, 2400, 3000, 2200, 3400, 2000, 2500, 2900, 3200, 2000, 2400, 3000, 2700, 2200, 3600, 2300, 2600, 3300,
+        1800, 2400, 3000, 2100, 3500, 2300, 2800, 2000, 3500, 1800, 2200, 3000, 2500, 1900, 3600, 2100, 2600, 3300, 2000, 2400,
+        2900, 2700, 2100, 3500, 2300, 2800, 3100, 1900, 2400, 3000, 2200, 3400, 2000, 2500, 2900, 3200, 2000, 2400, 3000, 2700,
+        2200, 3600, 2300, 2600, 3300, 1800, 2400, 3000, 2100, 3500, 2300, 2800, 2000, 3500, 1800, 2200, 3000, 2500, 1900, 3600
+    ],
+    'exercise_frequency': [
+        3, 1, 4, 2, 5, 3, 1, 2, 4, 0, 3, 2, 1, 5, 3, 1, 2, 4, 0, 3,
+        2, 1, 4, 3, 1, 4, 1, 5, 3, 2, 1, 4, 3, 1, 2, 4, 0, 3, 2, 1,
+        5, 3, 1, 4, 0, 3, 1, 4, 2, 5, 3, 1, 2, 4, 0, 3, 2, 1, 5, 3,
+        1, 2, 4, 0, 3, 2, 1, 4, 3, 1, 4, 1, 5, 3, 2, 1, 4, 3, 1, 2,
+        4, 0, 3, 2, 1, 5, 3, 1, 4, 0, 3, 1, 4, 2, 5, 3, 1, 2, 4, 0
+    ],
+    'blood_pressure': [
+        120, 138, 132, 155, 118, 125, 145, 135, 122, 160, 128, 136, 150, 119, 130, 140, 137, 124, 158, 127,
+        138, 148, 121, 131, 142, 126, 152, 123, 129, 140, 149, 122, 130, 141, 136, 127, 159, 128, 137, 150,
+        118, 131, 142, 125, 156, 120, 138, 132, 155, 118, 125, 145, 135, 122, 160, 128, 136, 150, 119, 130,
+        140, 137, 124, 158, 127, 138, 148, 121, 131, 142, 126, 152, 123, 129, 140, 149, 122, 130, 141, 136,
+        127, 159, 128, 137, 150, 118, 131, 142, 125, 156, 120, 138, 132, 155, 118, 125, 145, 135, 122, 160
+    ]
+}
+
+model2=LinearRegression()
+df2=pd.DataFrame(health_data_by_feature)
+x=df2[["age","weight","sodium_intake","exercise_frequency"]].values
+y=df2["blood_pressure"].values
+model2.fit(x,y)
+all_infos=[]
+user_age=int(input("enter your age"))
+all_infos.append(user_age)
+user_weight=int(input("enter your weight"))
+all_infos.append(user_weight)
+user_sodiumintake=int(input("enter sodium intake "))
+all_infos.append(user_sodiumintake)
+user_exercise=int(input("enter your excercise frequency"))
+all_infos.append(user_exercise)
+all_infos=np.array(all_infos).reshape(1,4)
+print("your blood pressure is approx =",model2.predict(all_infos)[0])
+
+
