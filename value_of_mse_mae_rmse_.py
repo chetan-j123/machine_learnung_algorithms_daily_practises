@@ -42,3 +42,7 @@ plt.scatter(n,mae,color="orange",s=300,label="mae")
 plt.scatter(n,rmse,color="grey",s=200,label="rmse")
 plt.legend()
 plt.show()
+
+#form the charts   this is clear
+#if there are only one outlier the difeerence between the regression line of mse comopared to rmse and mae is huge and also in prediction mae and rmse predicts value more accuarte
+#if more than 2 outliers the difeerence etween mse and rmse,mae is little but have immportance here mae predict more accuartely
