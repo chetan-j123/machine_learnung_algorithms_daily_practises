@@ -31,3 +31,15 @@ y_good  = model_good.predict(X_test)
 y_over  = model_over.predict(X_test)
 
 
+# ---------- PLOT ----------
+plt.figure(figsize=(12, 6))
+plt.scatter(X, y, color='black', label='Data Points')
+plt.plot(X_test, y_under, label='Underfitting (Linear)', linewidth=2)
+plt.plot(X_test, y_good, label='Good Fit (Degree 3)', linewidth=2)
+plt.plot(X_test, y_over, label='Overfitting (Degree 10)', linewidth=2)
+plt.title("Underfitting vs Good Fit vs Overfitting")
+plt.xlabel("Input")
+plt.ylabel("Output")
+plt.legend()
+plt.grid(True)
+plt.show()
