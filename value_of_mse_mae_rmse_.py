@@ -1,8 +1,4 @@
-# Import libraries
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.linear_model import LinearRegression, HuberRegressor,QuantileRegressor
+
 
 data={
     "height":[1,2,3,4,5,6,7,100],
