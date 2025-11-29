@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
-
 # Create sample data (non-linear curve)
 np.random.seed(0)
 X = np.linspace(0, 10, 20)
