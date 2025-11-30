@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
 data = [
     {"Area_sqft": 1460, "Rooms": 2, "Bathrooms": 1, "Price_in_Lakhs": 190},
     {"Area_sqft": 1894, "Rooms": 1, "Bathrooms": 3, "Price_in_Lakhs": 48},
@@ -57,6 +58,9 @@ data = [
 df=pd.DataFrame(data)
 model=Ridge(alpha=2)
 x=df[["Area_sqft","Rooms","Bathrooms"]].values
+#scaling needed bcz one feature is dominating
+sc=StandardScaler()
+x=sc.fit_transform(x)
 y=df["Price_in_Lakhs"].values   
 model.fit(x,y)
 area=int(input("enter the area of hose in sqft= "))
@@ -65,13 +69,16 @@ rooms=int(input("enter the rooms = "))
 bathrooms=int(input("enter the bathrooms = "))
 d2_array=np.array([area,rooms,bathrooms])
 d2_array=d2_array.reshape(1,-1)
-plt.plot(y,df["Area_sqft"],color="blue")
-plt.plot(y,df["Rooms"],color="green")
-plt.plot(y,df["Bathrooms"],color="red")
+d2_array=sc.fit_transform(d2_array)
+
+#prediction line
+print("regression line ")
+print("y_pred=",model.coef_[0],"x1",model.coef_[1],"x2",model.coef_[2],"x3+",model.intercept_)
+
 plt.show()
 print("ur house  price iss ig ",model.predict(d2_array)[0],"lakhs  ")
 #why we use ridge
 #all features imp
-#higk=ly coorelated features area with bathrooms and area with roomms
-#weights are very high inn this typs of data k=like area so most dominating  area h to iska weight bhi bhot jyada hpga not dekho ye dikkt yha ye thi ki hum ye nhi dekh rhe ki 4000 tk ki values hmare data me h bcsz hamatre dta me dusre features ki values bhot km h to area most dominating hofga weight bhot jyada linear regresssion ya lsso me other features remove ho jayenge
+#higk=ly coorelated features area with bathrooms and area with rooms
+#weights are very high in this typs of data like area so most dominating  area h to iska weight bhi bhot km adjust  hpga durse weights high unpr penalty jyda result area dominate so we uses scaling
 
