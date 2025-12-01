@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Ridge ,RidgeCV
 from sklearn.preprocessing import StandardScaler
 data = [
     {"Area_sqft": 1460, "Rooms": 2, "Bathrooms": 1, "Price_in_Lakhs": 190},
@@ -81,4 +81,59 @@ print("ur house  price iss ig ",model.predict(d2_array)[0],"lakhs  ")
 #all features imp
 #higk=ly coorelated features area with bathrooms and area with rooms
 #weights are very high in this typs of data like area so most dominating  area h to iska weight bhi bhot km adjust  hpga durse weights high unpr penalty jyda result area dominate so we uses scaling
+
+
+#=========icu sevrity score analyszer====================#
+
+medical_data=pd.read_csv("data.csv")
+x2=medical_data[['HR', 'SBP', 'DBP', 'MAP', 'RR', 'SpO2', 'Temp', 'Lactate',
+       'Creatinine', 'BUN', 'Sodium', 'Potassium', 'Chloride', 'Glucose',
+       'Hemoglobin', 'WBC', 'Platelets', 'pH', 'PaCO2', 'PaO2', 'HCO3',
+       'BaseExcess', 'AnionGap', 'Albumin', 'Bilirubin', 'ALT', 'AST', 'INR',
+       'Age', 'ICU_Hours_Since_Admission']].values
+#without .values keys and  valuess both stores in x it casues difficult
+y2=medical_data["ICU_Severity_Score"].values
+sc=StandardScaler()
+x2=sc.fit_transform(x2)#y2 values at same scale 
+model_we_have_uses_for_finding_best_alpha=RidgeCV(alphas=[0.01,0.1,1,10,100])
+#we have uses ridge cv for finidng best lambda and it automatically train model according to best lambbda
+model_we_have_uses_for_finding_best_alpha.fit(x2,y2)
+print(model_we_have_uses_for_finding_best_alpha.alpha_)#10
+HR =float(input("enter the hr"))
+SBP=float(input("enter the sbp"))
+DBP=float(input("enter the dbp"))
+MAP=float(input("enter the map"))
+RR=float(input("enter the rr"))
+SpO2=float(input("enter the spo2"))
+Temp=float(input("enter the temp"))
+Lactate=float(input("enter the lactate"))
+Creatinine=float(input("enter the creatinine"))
+BUN=float(input("enter the bun"))
+Sodium=float(input("enter the sodium"))
+Potassium=float(input("enter the potassium"))
+Chloride=float(input("enter the chloride"))
+Glucose=float(input("enter the glucose"))
+Hemoglobin=float(input("enter the hemoglobin"))
+WBC=float(input("enter the wbc"))
+Platelets=float(input("enter the platlets"))
+pH=float(input("enter the ph"))
+PaCO2=float(input("enter the paco2"))
+PaO2=float(input("enter the pao2"))
+HCO3=float(input("enter the hco3"))
+BaseExcess=float(input("enter the baseexcess"))
+AnionGap=float(input("enter the aniongap"))
+Albumin=float(input("enter the albumin"))
+Bilirubin=float(input("enter the bilirubin"))
+ALT=float(input("enter the alt"))
+AST=float(input("enter the ast"))
+INR=float(input("enter the inr"))
+Age=float(input("enter the age"))
+ICU_Hours_Since_Admission=float(input("enter the icu hours since admission"))
+Input=np.array([HR, SBP, DBP, MAP, RR, SpO2, Temp, Lactate,
+       Creatinine, BUN, Sodium, Potassium, Chloride, Glucose,
+       Hemoglobin, WBC, Platelets, pH, PaCO2, PaO2, HCO3,
+       BaseExcess, AnionGap, Albumin, Bilirubin, ALT, AST, INR,
+       Age, ICU_Hours_Since_Admission])
+Input=Input.reshape(1,-1)
+print("the icu severity score is = ",model_we_have_uses_for_finding_best_alpha.predict(Input)[0])
 
