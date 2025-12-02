@@ -135,5 +135,8 @@ Input=np.array([HR, SBP, DBP, MAP, RR, SpO2, Temp, Lactate,
        BaseExcess, AnionGap, Albumin, Bilirubin, ALT, AST, INR,
        Age, ICU_Hours_Since_Admission])
 Input=Input.reshape(1,-1)
+Input=sc.fit_transform(Input)
 print("the icu severity score is = ",model_we_have_uses_for_finding_best_alpha.predict(Input)[0])
+#why we usew ridge here 
+#1 we have large dtaset still every feature is important and accordding to real world medical data  it effects the output 
 
