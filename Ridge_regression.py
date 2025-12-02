@@ -139,4 +139,5 @@ Input=sc.fit_transform(Input)
 print("the icu severity score is = ",model_we_have_uses_for_finding_best_alpha.predict(Input)[0])
 #why we usew ridge here 
 #1 we have large dtaset still every feature is important and accordding to real world medical data  it effects the output 
+#2 features are high correlted 
 
