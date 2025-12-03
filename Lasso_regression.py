@@ -1,7 +1,7 @@
 import  numpy as  np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.linear_model import Lasso  ,LassoCV
+from sklearn.linear_model import Lasso  ,LassoCV,RidgeCV
 from sklearn.preprocessing import StandardScaler
 sc=StandardScaler()
 df=pd.read_csv("sample_dataset_with_target.csv")
@@ -30,7 +30,6 @@ print("removed features are ",removed)
 print("remained features are ",len(remains),"which is as following =",remains)
 #here we did features selection by using lasso regressio lasso removes that h=deatues that are not affecting the trget or and whichs weights becomme 0 while pemnalty givens to weights
 
-
 #sparse model requiremnet
 df2=pd.read_csv("data2.csv")
 x1=df2.drop(columns=["target"])
@@ -55,5 +54,17 @@ for i in range(0,len(features),1):
 print("total valuable fratures are = ",len(remains1))
 print("useless are ",len(removed1))
 #for moblie sparse requiremnet we can remove only 16 features it comes after high strength of penalty so remained 14 features are highly valuables
-#beacuse the 14 are highly correlated so train a ridge model baseed on 14
+#beacuse the 14 are highly correlated so train a ridge model baseed on 14 features 
+new_x=x1.drop(columns=removed1)
+print(new_x.ndim,new_x.shape,len(new_x))
+new_model=RidgeCV(alphas=[np.random.randint(0.1,10)])
+new_model.fit(new_x,y1)
+feature=[]
+for i in range(0,14,1):
+  fea=int(input("enter the feture value here =  "))
+  feature.append(fea)
+feature=np.array(feature)
+feature=feature.reshape(1,-1)
+print("target is = ",new_model.predict(feature)[0])
+
 
