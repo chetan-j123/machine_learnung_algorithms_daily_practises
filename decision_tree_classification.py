@@ -37,3 +37,4 @@ arr=np.array(arr)
 arr=arr.reshape(1,-1)
 #tree ploting
 print("you will get =  ",model.predict(arr)[0])
+#sometimes we see by runnign a same codee ionce 1 feature becomes root node and once another feature becomes root nodde this is bcz of they both have same info gain
