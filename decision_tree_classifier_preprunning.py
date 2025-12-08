@@ -44,3 +44,4 @@ print(accuracy_score(y_pred,y_test)*100)
 #final tree ploting
 tree.plot_tree(final_model,filled=True,feature_names=["age","income","experience_years","city_tier"],class_names=["No","yes"])
 plt.show()
+#insights from tree= if income is les than 48673 then he not purchases but if income is greater then 48673 but experience year is less rhan 5.5 means it not purchases but if experience year is greateer tand slary is laso grateer thn it will definatel buy
