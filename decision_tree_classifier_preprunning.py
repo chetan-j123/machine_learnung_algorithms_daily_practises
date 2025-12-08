@@ -41,3 +41,6 @@ final_model.fit(x_train,y_train)
 y_pred=final_model.predict(x_test)
 print(accuracy_score(y_pred,y_test)*100)
 #100% accuracy mens dzat me patterns bhot easy h and data me noise bhot km h
+#final tree ploting
+tree.plot_tree(final_model,filled=True,feature_names=["age","income","experience_years","city_tier"],class_names=["No","yes"])
+plt.show()
