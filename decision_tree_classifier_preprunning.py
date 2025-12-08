@@ -20,13 +20,16 @@ parmas={
     "min_samples_leaf":[2,3,4]
 }
 grid=GridSearchCV(
-    DecisionTreeClassifier(criterion="entropy"),
+    DecisionTreeClassifier(criterion="entropy"),#cross validation check for decison tree and (entropy )choose root node bse on info gain 
     parmas,
     cv=7
 )
+#we always choose cv based on the size of training datatset  like 70 rows so cv=7
+#cv=7 means makes 7 fold and always train -test with 6:! folds 7 times and find best params 
 grid.fit(x_train,y_train)
 print(grid.best_params_)
-#returns bestparrams after cross valiidation 5 times 
+#returns best params baed on cv=7
+#train final model based on params 
 final_model=DecisionTreeClassifier(
     criterion="entropy",
     max_depth=2,
