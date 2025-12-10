@@ -19,6 +19,9 @@ p=simple_overfitted_model.predict(x_train)
 trainnning_accuracy_of_overfitmodel=r2_score(p,y_train)
 print(test_accuaracy_of_overfitmodel)#very low to low
 print(trainnning_accuracy_of_overfitmodel)#almost 100%
+tree.plot_tree(simple_overfitted_model,filled=True)
+plt.title("simple overfitted model ")
+plt.show()
 #100% overfitting model
 
 #for increasing the accuracy score lets choose pre prunning
@@ -47,6 +50,9 @@ pre_prunned_decsion_tree_regression_model.fit(x_train,y_train)
 y_pred_wiht_pre_prunned_model=pre_prunned_decsion_tree_regression_model.predict(x_test)
 test_accuracy_of_pre_prunned_model=r2_score(y_test,y_pred_wiht_pre_prunned_model)
 print("test accuracy increases ",(test_accuracy_of_pre_prunned_model-test_accuaracy_of_overfitmodel)*100,"%","after using pre prunned model")
+tree.plot_tree(pre_prunned_decsion_tree_regression_model,filled=True)
+plt.title("pre prunned  model ")
+plt.show()
 
 #for see  the accuracy score lets choose post prunning
 path=simple_overfitted_model.cost_complexity_pruning_path(x_train,y_train)
@@ -72,5 +78,11 @@ post_prunned_decsion_tree_regression_model=DecisionTreeRegressor(random_state=42
 post_prunned_decsion_tree_regression_model.fit(x_train,y_train)
 y_pred_wiht_post_prunned_model=post_prunned_decsion_tree_regression_model.predict(x_test)
 test_accuracy_of_post_prunned_model=r2_score(y_test,y_pred_wiht_post_prunned_model)
-print("test accuracy increases ",(test_accuracy_of_post_prunned_model-test_accuaracy_of_overfitmodel)*100,"%","with post prunned model")
+print("test accuracy increases ",round((test_accuracy_of_post_prunned_model-test_accuaracy_of_overfitmodel)*100,2),"%","with post prunned model")
 #here psot prunned model shows more accuracy bcz of the dtype of dataset the dataset contains only 350 row  which is samall
+tree.plot_tree(post_prunned_decsion_tree_regression_model,filled=True)
+plt.title("post  prunned  model ")
+plt.show()
+print("simmple overfit model lengeth= ",simple_overfitted_model.get_depth(),"with leaf nodes = ",simple_overfitted_model.get_n_leaves())
+print("simmple pre prunned  model lengeth= ",pre_prunned_decsion_tree_regression_model.get_depth(),"with leaf nodes = ",pre_prunned_decsion_tree_regression_model.get_n_leaves())
+print("simmple psot prunned  model lengeth= ",post_prunned_decsion_tree_regression_model.get_depth(),"with leaf nodes = ",post_prunned_decsion_tree_regression_model.get_n_leaves())
