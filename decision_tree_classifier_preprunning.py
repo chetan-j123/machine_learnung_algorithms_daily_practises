@@ -22,12 +22,12 @@ parmas={
 grid=GridSearchCV(
     DecisionTreeClassifier(criterion="entropy"),#cross validation check for decison tree and (entropy )choose root node bse on info gain 
     parmas,
-    cv=7
+    cv=7#this is called cross validation 
 )
 #we always choose cv based on the size of training datatset  like 70 rows so cv=7
 #cv=7 means makes 7 fold and always train -test with 6:! folds 7 times and find best params 
-grid.fit(x_train,y_train)
-print(grid.best_params_)
+grid.fit(x_train,y_train)# we have uses ttrainnign dta  fro cv this is called cross validation dtaa 
+print(grid.best_params_)# by cv we get best values of parametres based on performance this is called hyper paramter tunning
 #returns best params baed on cv=7
 #train final model based on params 
 final_model=DecisionTreeClassifier(
